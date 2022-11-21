@@ -417,18 +417,17 @@ class ThePile(datasets.GeneratorBasedBuilder):
                 with zstd.open(open(path, "rb"), "rt", encoding="utf-8") as f:
                     for row in f:
                         try:
-                            if 'gutenberg' in path:
-                                data = json.loads(row.strip('\n')[:-1])
-                            else:
+                            try:
                                 data = json.loads(row)
-                            if len(data['text'].split()) > 8192:
+                            except:
+                                data = json.loads(row[:-1])
+                            if len(data['text'].split()) > 8192: # truncate long documents
                                 data['text'] = ' '.join(data['text'].split()[:8192])
                             if len(data['meta']) == 0: # prevent empty meta when write to lm_dataformat
                                 data['meta'] = str({"source": path})
                             data['meta'] = str(data['meta'])
                             data['id'] = str(key)
                         except:
-                            import ipdb; ipdb.set_trace()
                             continue
                         yield key, data
                         key += 1
