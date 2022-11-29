@@ -82,12 +82,14 @@ class StatFuncBuilder:
 
 
 class Statistics:
-    def __init__(self, dataset_path_or_name: str, read_flag="lmd") -> None:
-        if read_flag == "datasets":
-            self.dataset = load_dataset_custom(dataset_path_or_name)
+    def __init__(self, dataset_path_or_name: str, read_flag="lmd",dataset=None) -> None:
+        if not dataset:
+            if read_flag == "datasets":
+                self.dataset = load_dataset_custom(dataset_path_or_name)
+            else:
+                self.dataset = lmd.Reader(dataset_path_or_name).stream_data(get_meta=True)
         else:
-            self.dataset = lmd.Reader(dataset_path_or_name).stream_data(get_meta=True)
-
+            self.dataset = dataset
     def map_fn(self, example: dict[object]):
         """
         Map function for the dataset
