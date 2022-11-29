@@ -2,12 +2,19 @@ from transformers import GPTNeoXTokenizerFast
 import logging
 import re
 import fasttext
+from codepile.stats.src.flagged_words import english_flagged_words
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
+PATH_FASTTEXT = ""
 
-def load_fasttext_model(path_fasttext_model):
+
+def get_words(text: str) -> list:
+    """custom regex to extract all the words in a string"""
+    return re.findall(r'\w+', text.lower())
+
+def load_fasttext_model(path_fasttext_model:str=PATH_FASTTEXT):
     return fasttext.load_model(path_fasttext_model)
 
 
@@ -84,10 +91,25 @@ class Tokenization:
         return self.tokenizer.encode(text_list)
 
 
+class FlaggedWords:
+    def __init__(self) -> None:
+        self.flagged_words = english_flagged_words
+    
+    def check_flagged_words(self, text: str) -> list[str]:
+        words = get_words(text)
+        check_list = [word for word in words if word in self.flagged_words]
+        if len(check_list) > 1:
+            return True
+        else:
+            return False
+
+
 stat_config_map: dict[str] = {
     "lang_idt": LangDetection,
     "tokenize": Tokenization(),
     "len_char": lambda doc: len(doc),
     "len_utf8bytes": lambda doc: len(doc.encode("utf-8")),
     "len_words": lambda doc: len(re.split(r"\s+", doc)),
+    "flagged_words" : lambda doc: FlaggedWords().check_flagged_words,
 }
+

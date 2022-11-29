@@ -138,9 +138,9 @@ def master_map_fn(example: dict[object]):
     """
     Map function for the dataset
     """
-    stats = {}
-
-    stats["meta"] = example["meta"]
+    stats = ast.literal_eval(example["meta"])#{}
+    #stats.update(ast.literal_eval(example["meta"]))
+    #stats["meta"] = example["meta"]
     stats["tok_len"] = len(stat_config_map["tokenize"].tokenize(example["text"]))
    # stats["lang"] = stat_config_map["lang_detect"].detect(example["text"])
     stats["len_char"] = stat_config_map["len_char"](example["text"])
