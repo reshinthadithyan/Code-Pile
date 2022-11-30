@@ -60,7 +60,7 @@ text_datasets = [
     'RedditNonProgramming_8', 'RedditNonProgramming_9', 'RedditNonProgramming_11',
     'RedditNonProgramming_12', 'RedditNonProgramming_13', 'RedditNonProgramming_14', 'RedditNonProgramming_15',
     'RedditNonProgramming_16', 'RedditNonProgramming_17', 'RedditNonProgramming_18', 
-    'RedditNonProgramming_19', 'RedditNonProgramming_10', 'RedditNonProgramming_20'    
+    'RedditNonProgramming_19', 'RedditNonProgramming_10', 'RedditNonProgramming_20'  ,  'RedditProgramming_0', 'RedditProgramming_1', 'StackExchange_ver2' 
 ]
 
 code_datasets = [
@@ -68,7 +68,6 @@ code_datasets = [
     'RedditProgramming_0', 'RedditProgramming_1', 'RedditProgramming_2'
 ]
 
-text_datasets = [ 'RedditNonProgramming_0', 'RedditNonProgramming_1',  'RedditProgramming_0', 'RedditProgramming_1', 'StackExchange_ver2' ]
 
 small_pilev2_dict = {}
 stats_dict = {}
