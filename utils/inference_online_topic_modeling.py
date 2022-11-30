@@ -38,7 +38,7 @@ all_cats = ['arXiv', 'PubMed', 'Books3', 'Gutenberg', 'FreeLaw_Options', 'Ubuntu
             'CPDataset', 'USENET', 'AI4Code', 'Discourse', 'AMPS', 'LeetCode', 'OtherWiki', 'S2ORC', 'PileCC', 
             'USENET', 'OtherWiki', 'PubMed', 'UbuntuIRC']
 
-#all_cats = ['ASFPublicMail', 'StackExchange']
+all_cats = ['AI4Code']
 
 
 # topic_perpl_dict = {"FreeLaw_Options": 8.978133340013256, "EuroParliamentProceedings": 15.162733092355857,
